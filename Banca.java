@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+public class ClasseBanca {
+
 public static void menu() {
 	System.out.println("--------------MENU--------------");
 	System.out.println("1 - Deposita");
@@ -114,5 +116,6 @@ switch (scelta) {
 }
 }while(scelta !=0);
 
+}
 }
 
