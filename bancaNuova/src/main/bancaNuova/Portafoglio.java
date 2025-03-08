@@ -3,9 +3,9 @@ package bancaNuova;
 public class Portafoglio {
 
 	private double contoPortafoglio;
-	
+
 	public Portafoglio(double contoPortafoglio) {
-		this.contoPortafoglio=contoPortafoglio;
+		this.contoPortafoglio = contoPortafoglio;
 	}
 
 	public double getContoPortafoglio() {
@@ -15,9 +15,9 @@ public class Portafoglio {
 	public void setContoPortafoglio(double contoPortafoglio) {
 		this.contoPortafoglio = contoPortafoglio;
 	}
-	
+
 	public String toString(double contoPortafoglio) {
-		String s="Conto nel portafoglio: " + contoPortafoglio;
+		String s = "Conto nel portafoglio: " + contoPortafoglio;
 		return s;
 	}
 }

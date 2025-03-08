@@ -73,7 +73,7 @@ public class Menu {
 		}
 		return scelta;
 	}
-	
+
 	public int sceltaDurata() {
 
 		int durata = 0;
@@ -100,7 +100,7 @@ public class Menu {
 		}
 		return durata;
 	}
-	
+
 	public int sceltaRischi(int durata) {
 
 		menuInvestimentiRischio();
@@ -134,6 +134,5 @@ public class Menu {
 		}
 		return percentualeRischio;
 	}
-	
-	
+
 }

@@ -1,11 +1,8 @@
 package bancaNuova;
 
-
-
 import java.util.Scanner;
 
 public class tools {
-
 
 	public static int convertiInt(String sceltaString) {
 		int sceltaInt = -1;
@@ -53,7 +50,7 @@ public class tools {
 
 		return intero;
 	}
-	
+
 	public static String rimuoviSpazi(String s) {
 		if (s == null) {
 			return "";
@@ -78,5 +75,5 @@ public class tools {
 
 		return risultato;
 	}
-	
+
 }

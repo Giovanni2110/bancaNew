@@ -5,17 +5,17 @@ public class Investimento {
 	private int durata;
 	private int rischio;
 	private double soldi;
-	
+
 	public Investimento(double soldi, int durata, int rischio) {
-		this.soldi=soldi;
-		this.durata=durata;
-		this.rischio=rischio;
+		this.soldi = soldi;
+		this.durata = durata;
+		this.rischio = rischio;
 	}
 
 	public double getSoldi() {
 		return soldi;
 	}
-	
+
 	public int getDurata() {
 		return durata;
 	}
@@ -31,12 +31,12 @@ public class Investimento {
 	public void setRischio(int rischio) {
 		this.rischio = rischio;
 	}
-	
+
 	public String toString(int durata, int rischio) {
-		String s="";
-		s+="Durata: " + durata;
-		s+="Rischio: " + rischio;
-		s+="Soldi: " + soldi;
+		String s = "";
+		s += "Durata: " + durata;
+		s += "Rischio: " + rischio;
+		s += "Soldi: " + soldi;
 		return s;
 	}
 }

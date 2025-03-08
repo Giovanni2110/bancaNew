@@ -93,7 +93,7 @@ public class Banca {
 	}
 
 	public void ordina() {
-		
+
 		for (int i = 0; i < arrayInvestimenti.size() - 1; i++) {
 			for (int j = 0; j < arrayInvestimenti.size() - 1 - i; j++) {
 				if (arrayInvestimenti.get(j).getDurata() < arrayInvestimenti.get(j + 1).getDurata()) {
@@ -105,7 +105,6 @@ public class Banca {
 
 			}
 		}
-		
 
 	}
 
