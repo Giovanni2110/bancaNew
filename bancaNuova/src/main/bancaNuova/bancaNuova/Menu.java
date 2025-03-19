@@ -1,4 +1,3 @@
-package bancaNuova;
 
 import java.util.Scanner;
 
@@ -39,7 +38,7 @@ public class Menu {
 	public int scelta(int mese) {
 		stampa(mese);
 		System.out.print("\nSCEGLI --> ");
-		int scelta = tools.inserisciIntero();
+		int scelta = Tools.inserisciIntero();
 
 		while (scelta > n || scelta < 0) {
 			System.out.println("\nERRORE! ");
@@ -52,7 +51,7 @@ public class Menu {
 	public int scelta1() {
 		menuInvestimentiDurata();
 		System.out.print("\nSCEGLI --> ");
-		int scelta = tools.inserisciIntero();
+		int scelta = Tools.inserisciIntero();
 
 		while (scelta > n || scelta < 0) {
 			System.out.println("\nERRORE! ");
@@ -65,7 +64,7 @@ public class Menu {
 	public int scelta2() {
 		menuInvestimentiRischio();
 		System.out.print("\nSCEGLI --> ");
-		int scelta = tools.inserisciIntero();
+		int scelta = Tools.inserisciIntero();
 		while (scelta > n || scelta < 0) {
 			System.out.println("\nERRORE! ");
 			System.out.print("SCEGLI --> ");
@@ -84,7 +83,7 @@ public class Menu {
 		do {
 			System.out.print("Inserisci scelta:");
 			String sceltaDurataString = tastiera.nextLine();
-			sceltaDurata = tools.convertiInt(sceltaDurataString);
+			sceltaDurata = Tools.convertiInt(sceltaDurataString);
 		} while (sceltaDurata < 1 || sceltaDurata > 3);
 
 		switch (sceltaDurata) {
@@ -116,7 +115,7 @@ public class Menu {
 		do {
 			System.out.print("Inserisci scelta:");
 			String sceltaRischioString = tastiera.nextLine();
-			sceltaRischio = tools.convertiInt(sceltaRischioString);
+			sceltaRischio = Tools.convertiInt(sceltaRischioString);
 		} while (sceltaRischio < 1 || sceltaRischio > 3);
 
 		switch (sceltaRischio) {

@@ -1,4 +1,3 @@
-package bancaNuova;
 
 public class Investimento {
 
@@ -39,4 +38,5 @@ public class Investimento {
 		s += "Soldi: " + soldi;
 		return s;
 	}
+
 }

@@ -1,8 +1,7 @@
-package bancaNuova;
 
 import java.util.Scanner;
 
-public class tools {
+public class Tools {
 
 	public static int convertiInt(String sceltaString) {
 		int sceltaInt = -1;

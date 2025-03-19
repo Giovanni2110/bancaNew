@@ -1,4 +1,3 @@
-package bancaNuova;
 
 import java.util.Vector;
 
@@ -36,7 +35,7 @@ public class GestioneInvestimenti {
 					+ " mesi");
 			if (arrayInvestimenti.get(i).getDurata() == 0) {
 				System.out.println("Investimento terminato");
-				contoBanca += arrayInvestimenti.get(i).getSoldi();
+				getContoBanca() += arrayInvestimenti.get(i).getSoldi();
 				arrayInvestimenti.remove(i);
 			}
 		}

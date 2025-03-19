@@ -1,11 +1,6 @@
-package bancaNuova;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import myGarage.Veicolo;
+import java.io.*;
+import java.util.*;
 
 public class Utente {
 
@@ -18,6 +13,10 @@ public class Utente {
 		this.nome = nome;
 		this.contoPortafoglio = contoPortafoglio;
 		this.contoBanca = contoBanca;
+	}
+
+	public String getNome() {
+		return nome;
 	}
 
 	public double getContoPortafoglio() {
@@ -54,7 +53,7 @@ public class Utente {
 		if (deposito != -1) {
 			this.contoBanca += deposito;
 			this.contoPortafoglio -= deposito;
-			return this.contoPortafoglio;
+			return contoPortafoglio;
 		} else {
 			return -1;
 		}
@@ -62,7 +61,7 @@ public class Utente {
 	}
 
 	public double prelievo(double importo, double contoPortafoglio) {
-		double prelievo = gestisciImporti(importo, contoPortafoglio, true);
+		double prelievo = gestisciImporti(importo, true);
 		if (prelievo != -1) {
 			contoBanca -= prelievo;
 			contoPortafoglio += prelievo;
@@ -71,6 +70,60 @@ public class Utente {
 			return -1;
 		}
 
+	}
+
+	public void aggiorna() {
+		String filePath = "account.txt";
+		String nuovaRiga1 = "Portafoglio: " + String.valueOf(contoPortafoglio) + ";" + "ContoBanca: "
+				+ String.valueOf(contoBanca);
+
+		Vector<String> righe = new Vector<>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			String linea;
+			while ((linea = reader.readLine()) != null) {
+				righe.add(linea);
+			} // while
+		} // try
+		catch (IOException e) {
+			e.printStackTrace();
+		} // catch
+
+		if (righe.size() > 0) {
+			righe.set(0, nuovaRiga1);
+		} // if
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+			for (int i = 0; i < righe.size(); i++) {
+				writer.write(righe.get(i));
+				writer.newLine();
+			} // for
+		} // try
+		catch (IOException e) {
+			e.printStackTrace();
+		} // catch
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+			for (int i = 0; i < righe.size(); i++) {
+				writer.write(righe.get(i));
+				writer.newLine();
+			} // for
+		} // try
+		catch (IOException e) {
+			e.printStackTrace();
+		} // catch
+
+	}
+
+	public void registraOperazione(String operazione) {
+		String filePath = "account.txt";
+
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+			writer.write(operazione);
+			writer.newLine();
+		} // try
+		catch (IOException e) {
+			e.printStackTrace();
+		} // catch
 	}
 
 	@Override
