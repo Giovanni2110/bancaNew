@@ -25,13 +25,10 @@ public class Main {
 			case 1: {
 				double importoD = 0;
 				while (importoD <= 0) {
-					System.out.println("\nQuanti soldi vuoi prelevare?");
+					System.out.println("\nQuanti soldi depositare?");
 					String prelievoString = tastiera.nextLine();
 					importoD = Tools.convertiDouble(prelievoString);
 				}
-				System.out.println("\nQuanti soldi vuoi depositare?");
-				String prelievoString = tastiera.nextLine();
-				importoD = Tools.convertiDouble(prelievoString);
 				double temp = utente.deposito(importoD);
 				if (temp != -1) {
 					utente.setContoPortafoglio(temp);
@@ -41,7 +38,7 @@ public class Main {
 					System.out.println("Deposito fallito! Fondi insufficienti\n\n\n");
 				} // else
 				utente.aggiorna();
-				String operazione = "Hai prelevato " + String.valueOf(temp) + "£";
+				String operazione = "Hai depositato " + String.valueOf(temp) + "£";
 				utente.registraOperazione(operazione);
 				break;
 			} // case 1
@@ -88,7 +85,7 @@ public class Main {
 				int sceltaDelRischio;
 				sceltaDelRischio = m.sceltaRischi(sceltaDellaDurata);
 				System.out.println(sceltaDellaDurata);
-				if (gestioneI.investimento(soldi, sceltaDelRischio, sceltaDellaDurata) != null) {
+				if (gestioneI.investimento(soldi, sceltaDelRischio, sceltaDellaDurata, utente) != null) {
 					System.out.println("Investimento andato a buon fine!!!");
 				} else {
 					System.out.println("Investimento non riuscito!!!");
@@ -100,8 +97,8 @@ public class Main {
 				mese += 1;
 				utente.setContoPortafoglio(utente.getContoPortafoglio() + 100);
 
-				utente.ordina();
-				gestioneI.gestisciInvestimenti();
+				gestioneI.ordina();
+				gestioneI.gestisciInvestimenti(utente);
 				break;
 			}
 		} while (scelta != 0);

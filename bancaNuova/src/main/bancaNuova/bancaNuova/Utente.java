@@ -74,9 +74,8 @@ public class Utente {
 	}
 
 	public void aggiorna() {
-		String filePath = "account.txt";
-		String nuovaRiga1 = "Portafoglio: " + String.valueOf(contoPortafoglio) + ";" + "ContoBanca: "
-				+ String.valueOf(contoBanca);
+		String filePath = "C:\\Users\\Lenovo\\Documents\\GitHub\\bancaNew\\bancaNuova\\src\\main\\bancaNuova\\bancaNuova\\account.txt";
+		String nuovaRiga1 = String.valueOf(contoPortafoglio) +String.valueOf(contoBanca);
 
 		Vector<String> righe = new Vector<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -116,7 +115,7 @@ public class Utente {
 	}
 
 	public void registraOperazione(String operazione) {
-		String filePath = "account.txt";
+		String filePath = "C:\\Users\\Lenovo\\Documents\\GitHub\\bancaNew\\bancaNuova\\src\\main\\bancaNuova\\bancaNuova\\account.txt";
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
 			writer.write(operazione);
@@ -125,6 +124,25 @@ public class Utente {
 		catch (IOException e) {
 			e.printStackTrace();
 		} // catch
+	}
+	
+	public static Utente leggiUtenteDaFile(String nomeUtente) {
+		String filePath = "C:\\Users\\Lenovo\\Documents\\GitHub\\bancaNew\\bancaNuova\\src\\main\\bancaNuova\\bancaNuova\\account.txt";
+		try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+			String linea = reader.readLine();// legge la prima riga
+			if(linea != null) {
+				String [] numeri = linea.split("\\s+");// divide i numeri separati da spazio
+				if(numeri.length >= 2) {
+					double contoBanca = Double.parseDouble(numeri[0]);
+					double contoPortafoglio = Double.parseDouble(numeri[1]);
+					return new Utente(nomeUtente,contoPortafoglio,contoBanca);
+				}// if
+			}// if
+		}// try
+		catch(IOException | NumberFormatException e) {
+			e.printStackTrace();
+		}// catch
+		return null;
 	}
 
 	@Override

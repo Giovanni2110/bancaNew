@@ -13,30 +13,28 @@ public class GestioneUtenti {
 
 	}
 
-	public Utente cercaUtente(String nomeUtente) {
-		for (int i = 0; i < utenti.size(); i++) {
-			if (utenti.get(i).getNome().equals(nomeUtente)) {
-				return utenti.get(i);
-			}
-		}
-		return null;
-	}
-
 	public Utente Accesso() {
+		
+		String filePath = "C:\\Users\\Lenovo\\Documents\\GitHub\\bancaNew\\bancaNuova\\src\\main\\bancaNuova\\bancaNuova\\datiUtenti.txt";
 
-		System.out.print("Ciao, vuoi accedere o registrarti?(a o r)");
+		System.out.print("Ciao, vuoi accedere o registrarti?(a o r):");
 		String s = tastiera.nextLine();
-		while (s != "a" || s != "r") {
+		while (s.length() > 1) {
+			System.out.println("Non puoi inserire piu' di un carattere!");
+			System.out.print("Vuoi accedere o registrarti?(a o r):");
+			s = tastiera.nextLine();
+		} // while
+		while (s.charAt(0) != 'a' && s.charAt(0) != 'r') {
 			System.out.print("Errore, reinserisci scelta!");
-			System.out.print("Vuoi accedere o registrarti?(a o r)");
+			System.out.print("Vuoi accedere o registrarti?(a o r):");
 			s = tastiera.nextLine();
 		} // while
 
-		if (s == "a") {
+		if (s.charAt(0) == 'a') {
 			System.out.print("Inserisci nome utente: ");
 			String nomeUtente = tastiera.nextLine();
 
-			try (BufferedReader reader = new BufferedReader(new FileReader(fileUtenti))) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 				String linea = reader.readLine();
 				while ((linea = reader.readLine()) != null) { // legge ogni riga del file
 					if (linea.equals(nomeUtente)) {
@@ -52,7 +50,7 @@ public class GestioneUtenti {
 			System.out.print("Inserisci password: ");
 			String password = tastiera.nextLine();
 
-			try (BufferedReader reader = new BufferedReader(new FileReader(fileUtenti))) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 				String linea = reader.readLine();
 				while ((linea = reader.readLine()) != null) { // legge ogni riga del file
 					if (linea.equals(password)) {
@@ -65,11 +63,12 @@ public class GestioneUtenti {
 				e.printStackTrace();
 			} // catch
 
-			Utente u = cercaUtente(nomeUtente);
 			System.out.print("Accesso avvenuto correttamente!");
-			return u;
+			Utente u = new Utente("w", 1.0, 1.0);
+			Utente utente = u.leggiUtenteDaFile(nomeUtente);
+			return utente;
 		} // if
-		else if (s == "r") {
+		else if (s.charAt(0) == 'r') {
 			System.out.print("Inserisci nome utente: ");
 			String nomeUtente = tastiera.nextLine();
 			System.out.print("Inserisci password: ");
@@ -77,14 +76,19 @@ public class GestioneUtenti {
 
 			System.out.print("Sei sicuro delle credenziali?(s o n)");
 			s = tastiera.nextLine();
-			while (s != "s" || s != "n") {
+			while (s.length() > 1) {
+				System.out.println("Non puoi inserire piu' di un carattere!");
+				System.out.print("Sei sicuro delle credenziali?(s o n)");
+				s = tastiera.nextLine();
+			} // while
+			while (s.charAt(0) != 's' && s.charAt(0) != 'n') {
 				System.out.print("Errore, reinserisci scelta!");
 				System.out.print("Sei sicuro delle credenziali?(s o n)");
 				s = tastiera.nextLine();
 			} // while
 
-			if (s == "s") {
-				try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileUtenti, true))) {// true per non
+			if (s.charAt(0) == 's') {
+				try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {// true per non
 					// sovrascrivere
 					writer.write(nomeUtente);
 					writer.newLine();
@@ -98,7 +102,7 @@ public class GestioneUtenti {
 				Utente utente = new Utente(nomeUtente, 100, 0);
 				return utente;
 			} // if
-			while (s == "n") {
+			while (s.charAt(0) == 'n') {
 				System.out.print("Inserisci nome utente: ");
 				nomeUtente = tastiera.nextLine();
 				System.out.print("Inserisci password: ");
@@ -106,7 +110,7 @@ public class GestioneUtenti {
 
 				System.out.print("Sei sicuro delle credenziali?(s o n)");
 				s = tastiera.nextLine();
-				while (s != "s" || s != "n") {
+				while (s.charAt(0) != 's' && s.charAt(0) != 'n') {
 					System.out.print("Errore, reinserisci scelta!");
 					System.out.print("Sei sicuro delle credenziali?(s o n)");
 					s = tastiera.nextLine();
