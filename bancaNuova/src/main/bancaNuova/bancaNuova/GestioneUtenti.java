@@ -6,7 +6,7 @@ import java.util.*;
 public class GestioneUtenti {
 	Scanner tastiera = new Scanner(System.in);
 
-	public static final File fileUtenti = new File("datiUtenti.txt");
+	private static final File fileUtenti = new File("datiUtenti.txt");
 
 	// costruttore
 	public GestioneUtenti() {
@@ -15,7 +15,7 @@ public class GestioneUtenti {
 
 	public Utente Accesso() {
 		
-		String filePath = "C:\\Users\\Lenovo\\Documents\\GitHub\\bancaNew\\bancaNuova\\src\\main\\bancaNuova\\bancaNuova\\datiUtenti.txt";
+		String filePath = "datiUtenti.txt";
 
 		System.out.print("Ciao, vuoi accedere o registrarti?(a o r):");
 		String s = tastiera.nextLine();
@@ -64,8 +64,7 @@ public class GestioneUtenti {
 			} // catch
 
 			System.out.print("Accesso avvenuto correttamente!");
-			Utente u = new Utente("w", 1.0, 1.0);
-			Utente utente = u.leggiUtenteDaFile(nomeUtente);
+			Utente utente = Utente.leggiUtenteDaFile(nomeUtente);
 			return utente;
 		} // if
 		else if (s.charAt(0) == 'r') {
@@ -100,6 +99,7 @@ public class GestioneUtenti {
 					e.printStackTrace();
 				} // catch
 				Utente utente = new Utente(nomeUtente, 100, 0);
+				utente.creazione();
 				return utente;
 			} // if
 			while (s.charAt(0) == 'n') {
