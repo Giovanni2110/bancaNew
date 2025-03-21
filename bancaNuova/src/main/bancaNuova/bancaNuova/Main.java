@@ -5,13 +5,17 @@ import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner tastiera = new Scanner(System.in);
 		GestioneUtenti gestioneU = new GestioneUtenti();
 		GestioneInvestimenti gestioneI = new GestioneInvestimenti();
 
 		int mese = 1;
 		Utente utente = gestioneU.Accesso();
+		if(utente == null) {
+			tastiera.close();
+			return;
+		}
 
 		Menu m = new Menu(6);
 		int scelta;
@@ -37,9 +41,9 @@ public class Main {
 				else {
 					System.out.println("Deposito fallito! Fondi insufficienti\n\n\n");
 				} // else
-				utente.aggiorna();
-				String operazione = "Hai depositato " + String.valueOf(temp) + "£";
-				utente.registraOperazione(operazione);
+				utente.aggiorna(utente.getNome());
+				String operazione = "Hai depositato " + String.valueOf(importoD) + "£";
+				utente.registraOperazione(operazione,utente.getNome());
 				break;
 			} // case 1
 
@@ -54,9 +58,9 @@ public class Main {
 				if (temp1 != -1) {
 					utente.setContoPortafoglio(temp1);
 					System.out.println("Prelievo avvenuto con successo\n\n\n");
-					utente.aggiorna();
-					String operazione = "Hai prelevato " + String.valueOf(temp1) + "£";
-					utente.registraOperazione(operazione);
+					utente.aggiorna(utente.getNome());
+					String operazione = "Hai prelevato " + String.valueOf(importoP) + "£";
+					utente.registraOperazione(operazione,utente.getNome());
 				} else {
 					System.out.println("Prelievo fallito! Fondi insufficienti\n\n\n");
 				}
@@ -71,14 +75,13 @@ public class Main {
 				break;
 
 			case 5:
-
 				double soldi;
 
-				do {
+				do{
 					System.out.println("Quanti soldi vuoi investire?");
 					String investitiString = tastiera.nextLine();
 					soldi = Tools.convertiDouble(investitiString);
-				} while (soldi > utente.getContoBanca() || soldi <= 0);
+				}while (soldi > utente.getContoBanca() || soldi <= 0);
 
 				int sceltaDellaDurata;
 				sceltaDellaDurata = m.sceltaDurata();

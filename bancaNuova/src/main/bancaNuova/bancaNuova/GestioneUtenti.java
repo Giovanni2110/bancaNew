@@ -4,17 +4,13 @@ import java.io.*;
 import java.util.*;
 
 public class GestioneUtenti {
+	
 	Scanner tastiera = new Scanner(System.in);
-
 	private static final File fileUtenti = new File("datiUtenti.txt");
 
-	// costruttore
-	public GestioneUtenti() {
-
-	}
-
-	public Utente Accesso() {
+	public Utente Accesso() throws IOException{
 		
+
 		String filePath = "datiUtenti.txt";
 
 		System.out.print("Ciao, vuoi accedere o registrarti?(a o r):");
@@ -29,45 +25,76 @@ public class GestioneUtenti {
 			System.out.print("Vuoi accedere o registrarti?(a o r):");
 			s = tastiera.nextLine();
 		} // while
-
 		if (s.charAt(0) == 'a') {
-			System.out.print("Inserisci nome utente: ");
-			String nomeUtente = tastiera.nextLine();
-
 			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 				String linea = reader.readLine();
-				while ((linea = reader.readLine()) != null) { // legge ogni riga del file
-					if (linea.equals(nomeUtente)) {
-						System.out.print("Nome utente corretto!");
-						break;
-					} // if
-				} // while
-			} // try
-			catch (IOException e) {
+				if (linea == null) {
+					s = "r";
+				} // if
+				reader.close();
+			} catch (IOException e) {
 				e.printStackTrace();
 			} // catch
 
-			System.out.print("Inserisci password: ");
-			String password = tastiera.nextLine();
-
-			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-				String linea = reader.readLine();
-				while ((linea = reader.readLine()) != null) { // legge ogni riga del file
-					if (linea.equals(password)) {
-						System.out.print("Password corretta!");
-						break;
-					} // if
-				} // while
-			} // try
-			catch (IOException e) {
-				e.printStackTrace();
-			} // catch
-
-			System.out.print("Accesso avvenuto correttamente!");
-			Utente utente = Utente.leggiUtenteDaFile(nomeUtente);
-			return utente;
+			if (s.charAt(0) == 'r') {
+				System.out.println("Non c'è nessun account presente!");
+				System.out.println("Ti faremo fare la registrazione :)");
+			} // if
+			else {
+				boolean nomeUtenteTrovato = false;
+				String nomeUtente = "";
+				while(!nomeUtenteTrovato) {
+					System.out.print("Inserisci nome utente: ");
+					nomeUtente = tastiera.nextLine();
+					try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath))) {
+						String linea1;
+						while ((linea1 = reader1.readLine()) != null){ // legge ogni riga del file
+							if (linea1.equals(nomeUtente)) {
+								System.out.println("Nome utente corretto!");
+								nomeUtenteTrovato = true;
+								break;
+							} // if
+						} // while
+						if(nomeUtenteTrovato) {
+							
+						}// if
+						else {
+							System.err.println("Nome utente sbagliato! Riprova");
+						}// else
+					}// try
+					catch(IOException e) {
+						System.err.println("Errore nella lettura del file: " +e.getMessage());
+					}// catch
+				}// while
+				nomeUtenteTrovato = false;
+				while(!nomeUtenteTrovato) {
+					System.out.print("Inserisci password: ");
+					String password = tastiera.nextLine();
+					try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath))) {
+						String linea1;
+						while ((linea1 = reader1.readLine()) != null){ // legge ogni riga del file
+							if (linea1.equals(password)) {
+								System.out.println("Password corretta!");
+								nomeUtenteTrovato = true;
+								break;
+							} // if
+						} // while
+						if(nomeUtenteTrovato) {
+							
+						}// if
+						else {
+							System.err.println("Password sbagliata! Riprova");
+						}// else
+					}// try
+					catch(IOException e) {
+						System.err.println("Errore nella lettura del file: " +e.getMessage());
+					}// catch
+				}// while
+				Utente utente = Utente.leggiUtenteDaFile(nomeUtente);
+				return utente;
+			}// else
 		} // if
-		else if (s.charAt(0) == 'r') {
+		if (s.charAt(0) == 'r') {
 			System.out.print("Inserisci nome utente: ");
 			String nomeUtente = tastiera.nextLine();
 			System.out.print("Inserisci password: ");
@@ -99,7 +126,7 @@ public class GestioneUtenti {
 					e.printStackTrace();
 				} // catch
 				Utente utente = new Utente(nomeUtente, 100, 0);
-				utente.creazione();
+				utente.creazione(nomeUtente);
 				return utente;
 			} // if
 			while (s.charAt(0) == 'n') {
@@ -118,7 +145,7 @@ public class GestioneUtenti {
 			} // while
 			Utente utente = new Utente(nomeUtente, 100, 0);
 			return utente;
-		} // else if
+		} // if
 		return null;
 	}
 }

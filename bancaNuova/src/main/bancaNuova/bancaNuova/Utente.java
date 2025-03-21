@@ -6,7 +6,6 @@ import java.util.*;
 public class Utente {
 
 	private String nome;
-	private static File transazioni = new File("C:\\Users\\Lenovo\\OneDrive\\Documenti\\BANCACANTON\\account.txt");
 	private double contoPortafoglio;
 	private double contoBanca;
 
@@ -14,11 +13,10 @@ public class Utente {
 		this.nome = nome;
 		this.contoPortafoglio = contoPortafoglio;
 		this.contoBanca = contoBanca;
-		try {
-			transazioni.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { transazioni.createNewFile(); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
 	}
 
 	public String getNome() {
@@ -78,11 +76,11 @@ public class Utente {
 
 	}
 
-	public void aggiorna() {
-		String nuovaRiga1 = String.valueOf(contoPortafoglio) + String.valueOf(contoBanca);
-
+	public void aggiorna(String nomeUtente) {
+		String nuovaRiga1 = String.valueOf(contoPortafoglio) + ";" + String.valueOf(contoBanca);
+		String filePath = "account" +nomeUtente +".txt";
 		Vector<String> righe = new Vector<>();
-		try (BufferedReader reader = new BufferedReader(new FileReader(transazioni))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String linea;
 			while ((linea = reader.readLine()) != null) {
 				righe.add(linea);
@@ -96,7 +94,7 @@ public class Utente {
 			righe.set(0, nuovaRiga1);
 		} // if
 
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			for (int i = 0; i < righe.size(); i++) {
 				writer.write(righe.get(i));
 				writer.newLine();
@@ -106,7 +104,7 @@ public class Utente {
 			e.printStackTrace();
 		} // catch
 
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			for (int i = 0; i < righe.size(); i++) {
 				writer.write(righe.get(i));
 				writer.newLine();
@@ -117,8 +115,10 @@ public class Utente {
 		} // catch
 
 	}
-	
-	public void creazione() {
+
+	public void creazione(String nomeUtente) {
+
+		File transazioni = new File("account" +nomeUtente + ".txt");
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
 			writer.write(100 + ";" + 0);
 			writer.newLine();
@@ -128,9 +128,10 @@ public class Utente {
 		} // catch
 	}
 
-	public void registraOperazione(String operazione) {
+	public void registraOperazione(String operazione, String nomeUtente) {
+		String filePath = "account" +nomeUtente +".txt";
 
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni, true))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
 			writer.write(operazione);
 			writer.newLine();
 		} // try
@@ -140,17 +141,15 @@ public class Utente {
 	}
 
 	public static Utente leggiUtenteDaFile(String nomeUtente) {
-		try (BufferedReader reader = new BufferedReader(new FileReader(transazioni))) {
+		String filePath = "account" +nomeUtente +".txt";
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String linea = reader.readLine();// legge la prima riga
 			if (linea != null) {
 				String[] numeri = linea.split(";");// divide i numeri separati da spazio
-
-				if (numeri.length >= 2) {
-					double contoBanca = Double.parseDouble(numeri[0]);
-					double contoPortafoglio = Double.parseDouble(numeri[1]);
-					Utente nuovo = new Utente(nomeUtente, contoPortafoglio, contoBanca);
-					return nuovo;
-				} // if
+				double contoPortafoglio = Double.parseDouble(numeri[0]);
+				double contoBanca = Double.parseDouble(numeri[1]);
+				Utente nuovo = new Utente(nomeUtente, contoPortafoglio, contoBanca);
+				return nuovo;
 			} // if
 		} // try
 		catch (IOException | NumberFormatException e) {
