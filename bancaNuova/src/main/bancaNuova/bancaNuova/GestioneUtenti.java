@@ -1,15 +1,13 @@
-package myBank;
 
 import java.io.*;
 import java.util.*;
 
 public class GestioneUtenti {
-	
+
 	Scanner tastiera = new Scanner(System.in);
 	private static final File fileUtenti = new File("datiUtenti.txt");
 
-	public Utente Accesso() throws IOException{
-		
+	public Utente Accesso() throws IOException {
 
 		String filePath = "datiUtenti.txt";
 
@@ -43,56 +41,56 @@ public class GestioneUtenti {
 			else {
 				boolean nomeUtenteTrovato = false;
 				String nomeUtente = "";
-				while(!nomeUtenteTrovato) {
+				while (!nomeUtenteTrovato) {
 					System.out.print("Inserisci nome utente: ");
 					nomeUtente = tastiera.nextLine();
 					try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath))) {
 						String linea1;
-						while ((linea1 = reader1.readLine()) != null){ // legge ogni riga del file
+						while ((linea1 = reader1.readLine()) != null) { // legge ogni riga del file
 							if (linea1.equals(nomeUtente)) {
 								System.out.println("Nome utente corretto!");
 								nomeUtenteTrovato = true;
 								break;
 							} // if
 						} // while
-						if(nomeUtenteTrovato) {
-							
-						}// if
+						if (nomeUtenteTrovato) {
+
+						} // if
 						else {
 							System.err.println("Nome utente sbagliato! Riprova");
-						}// else
-					}// try
-					catch(IOException e) {
-						System.err.println("Errore nella lettura del file: " +e.getMessage());
-					}// catch
-				}// while
+						} // else
+					} // try
+					catch (IOException e) {
+						System.err.println("Errore nella lettura del file: " + e.getMessage());
+					} // catch
+				} // while
 				nomeUtenteTrovato = false;
-				while(!nomeUtenteTrovato) {
+				while (!nomeUtenteTrovato) {
 					System.out.print("Inserisci password: ");
 					String password = tastiera.nextLine();
 					try (BufferedReader reader1 = new BufferedReader(new FileReader(filePath))) {
 						String linea1;
-						while ((linea1 = reader1.readLine()) != null){ // legge ogni riga del file
+						while ((linea1 = reader1.readLine()) != null) { // legge ogni riga del file
 							if (linea1.equals(password)) {
 								System.out.println("Password corretta!");
 								nomeUtenteTrovato = true;
 								break;
 							} // if
 						} // while
-						if(nomeUtenteTrovato) {
-							
-						}// if
+						if (nomeUtenteTrovato) {
+
+						} // if
 						else {
 							System.err.println("Password sbagliata! Riprova");
-						}// else
-					}// try
-					catch(IOException e) {
-						System.err.println("Errore nella lettura del file: " +e.getMessage());
-					}// catch
-				}// while
+						} // else
+					} // try
+					catch (IOException e) {
+						System.err.println("Errore nella lettura del file: " + e.getMessage());
+					} // catch
+				} // while
 				Utente utente = Utente.leggiUtenteDaFile(nomeUtente);
 				return utente;
-			}// else
+			} // else
 		} // if
 		if (s.charAt(0) == 'r') {
 			System.out.print("Inserisci nome utente: ");

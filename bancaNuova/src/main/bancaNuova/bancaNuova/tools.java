@@ -1,4 +1,3 @@
-package myBank;
 
 import java.util.Scanner;
 

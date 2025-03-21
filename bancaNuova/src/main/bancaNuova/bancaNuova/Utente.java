@@ -1,4 +1,3 @@
-package myBank;
 
 import java.io.*;
 import java.util.*;
@@ -78,7 +77,7 @@ public class Utente {
 
 	public void aggiorna(String nomeUtente) {
 		String nuovaRiga1 = String.valueOf(contoPortafoglio) + ";" + String.valueOf(contoBanca);
-		String filePath = "account" +nomeUtente +".txt";
+		String filePath = "account" + nomeUtente + ".txt";
 		Vector<String> righe = new Vector<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String linea;
@@ -118,7 +117,7 @@ public class Utente {
 
 	public void creazione(String nomeUtente) {
 
-		File transazioni = new File("account" +nomeUtente + ".txt");
+		File transazioni = new File("account" + nomeUtente + ".txt");
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
 			writer.write(100 + ";" + 0);
 			writer.newLine();
@@ -129,7 +128,7 @@ public class Utente {
 	}
 
 	public void registraOperazione(String operazione, String nomeUtente) {
-		String filePath = "account" +nomeUtente +".txt";
+		String filePath = "account" + nomeUtente + ".txt";
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
 			writer.write(operazione);
@@ -141,7 +140,7 @@ public class Utente {
 	}
 
 	public static Utente leggiUtenteDaFile(String nomeUtente) {
-		String filePath = "account" +nomeUtente +".txt";
+		String filePath = "account" + nomeUtente + ".txt";
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String linea = reader.readLine();// legge la prima riga
 			if (linea != null) {
@@ -158,7 +157,6 @@ public class Utente {
 		return null;
 	}
 
-	@Override
 	public String toString() {
 		String s = "";
 		s += "Conto in banca: " + contoBanca + "£";
