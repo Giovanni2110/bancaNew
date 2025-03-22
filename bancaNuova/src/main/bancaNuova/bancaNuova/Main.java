@@ -1,18 +1,30 @@
 package myBank;
 
+public class Main {
+    public static void main(String[] args) {
+        // Avvia solo l'interfaccia grafica (GUI)
+        GUI.main(args);
+    }
+}
+
+/*package myBank;
+
 import java.io.*;
 import java.util.*;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		GUI.main(args);
+
 		Scanner tastiera = new Scanner(System.in);
 		GestioneUtenti gestioneU = new GestioneUtenti();
 		GestioneInvestimenti gestioneI = new GestioneInvestimenti();
 
 		int mese = 1;
+
 		Utente utente = gestioneU.Accesso();
-		if(utente == null) {
+		if (utente == null) {
 			tastiera.close();
 			return;
 		}
@@ -43,7 +55,7 @@ public class Main {
 				} // else
 				utente.aggiorna(utente.getNome());
 				String operazione = "Hai depositato " + String.valueOf(importoD) + "£";
-				utente.registraOperazione(operazione,utente.getNome());
+				utente.registraOperazione(operazione, utente.getNome());
 				break;
 			} // case 1
 
@@ -60,7 +72,7 @@ public class Main {
 					System.out.println("Prelievo avvenuto con successo\n\n\n");
 					utente.aggiorna(utente.getNome());
 					String operazione = "Hai prelevato " + String.valueOf(importoP) + "£";
-					utente.registraOperazione(operazione,utente.getNome());
+					utente.registraOperazione(operazione, utente.getNome());
 				} else {
 					System.out.println("Prelievo fallito! Fondi insufficienti\n\n\n");
 				}
@@ -77,11 +89,12 @@ public class Main {
 			case 5:
 				double soldi;
 
-				do{
+				do {
 					System.out.println("Quanti soldi vuoi investire?");
 					String investitiString = tastiera.nextLine();
 					soldi = Tools.convertiDouble(investitiString);
-				}while (soldi > utente.getContoBanca() || soldi <= 0);
+
+				} while (soldi > utente.getContoBanca() || soldi <= 0);
 
 				int sceltaDellaDurata;
 				sceltaDellaDurata = m.sceltaDurata();
@@ -89,7 +102,10 @@ public class Main {
 				sceltaDelRischio = m.sceltaRischi(sceltaDellaDurata);
 				System.out.println(sceltaDellaDurata);
 				if (gestioneI.investimento(soldi, sceltaDelRischio, sceltaDellaDurata, utente) != null) {
-					System.out.println("Investimento andato a buon fine!!!");
+					System.out.println("Investimento fatto!!!");
+					utente.aggiorna(utente.getNome());
+					String operazione = "Investimento di " +String.valueOf(soldi) +"£";
+					utente.registraOperazione(operazione, utente.getNome());
 				} else {
 					System.out.println("Investimento non riuscito!!!");
 				}
@@ -98,13 +114,16 @@ public class Main {
 
 			case 6:
 				mese += 1;
-				utente.setContoPortafoglio(utente.getContoPortafoglio() + 100);
+				gestioneI.aggiornaPortafoglio(utente);
 
 				gestioneI.ordina();
 				gestioneI.gestisciInvestimenti(utente);
+
 				break;
 			}
 		} while (scelta != 0);
+
 		tastiera.close();
+
 	}
-}
+}*/
