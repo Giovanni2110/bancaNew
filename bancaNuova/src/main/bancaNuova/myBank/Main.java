@@ -1,3 +1,13 @@
+package myBank;
+
+public class Main {
+    public static void main(String[] args) {
+        // Avvia solo l'interfaccia grafica (GUI)
+        GUI.main(args);
+    }
+}
+
+/*package myBank;
 
 import java.io.*;
 import java.util.*;
@@ -5,6 +15,7 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		GUI.main(args);
 
 		Scanner tastiera = new Scanner(System.in);
 		GestioneUtenti gestioneU = new GestioneUtenti();
@@ -92,6 +103,9 @@ public class Main {
 				System.out.println(sceltaDellaDurata);
 				if (gestioneI.investimento(soldi, sceltaDelRischio, sceltaDellaDurata, utente) != null) {
 					System.out.println("Investimento fatto!!!");
+					utente.aggiorna(utente.getNome());
+					String operazione = "Investimento di " +String.valueOf(soldi) +"£";
+					utente.registraOperazione(operazione, utente.getNome());
 				} else {
 					System.out.println("Investimento non riuscito!!!");
 				}
@@ -112,4 +126,4 @@ public class Main {
 		tastiera.close();
 
 	}
-}
+}*/

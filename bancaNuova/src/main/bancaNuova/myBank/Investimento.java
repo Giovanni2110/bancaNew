@@ -1,3 +1,4 @@
+package myBank;
 
 public class Investimento {
 

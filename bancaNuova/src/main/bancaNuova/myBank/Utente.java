@@ -1,3 +1,4 @@
+package myBank;
 
 import java.io.*;
 import java.util.*;
@@ -115,23 +116,23 @@ public class Utente {
 
 	}
 
-	public void creazione(String nomeUtente) {
+	public void registraOperazione(String operazione, String nomeUtente) {
+		String filePath = "account" + nomeUtente + ".txt";
 
-		File transazioni = new File("account" + nomeUtente + ".txt");
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
-			writer.write(100 + ";" + 0);
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+			writer.write(operazione);
 			writer.newLine();
 		} // try
 		catch (IOException e) {
 			e.printStackTrace();
 		} // catch
 	}
+	
+	public void creazione(String nomeUtente) {
 
-	public void registraOperazione(String operazione, String nomeUtente) {
-		String filePath = "account" + nomeUtente + ".txt";
-
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-			writer.write(operazione);
+		File transazioni = new File("account" + nomeUtente + ".txt");
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(transazioni))) {
+			writer.write(100 + ";" + 0);
 			writer.newLine();
 		} // try
 		catch (IOException e) {
