@@ -25,5 +25,39 @@
       <version>2.24.1</version>
     </dependency>
   </dependencies>
+
+  <dependencies>
+    <!-- JUnit 5 -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.7.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.7.2</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Mockito -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.9.0</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version> <!-- Assicurati di avere l'ultima versione -->
+        </plugin>
+    </plugins>
+</build>
   
 </project>
